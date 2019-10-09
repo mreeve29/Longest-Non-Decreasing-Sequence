@@ -6,16 +6,28 @@ public class SequenceSolver {
 	private int[] longestSequence;
 	
 	public SequenceSolver(String raw) {
-		
+		rawInput = raw;
+		fullSequence = parseString();
+	}
+	
+	public int[] getRawIntArray() {
+		return fullSequence;
 	}
 	
 	
 	
 	
 	private int[] parseString() {
-		int size = ReeveHelper.occurencesInString(rawInput, ',')+1;
-		int[] rawSequence = new int[size];
+		String[] split = rawInput.split(",");
+		int[] rawSequence = new int[split.length];
 		
+		for(int i = 0; i < split.length; i++){
+			try {
+				rawSequence[i] = Integer.parseInt(split[i]);
+			}catch (Exception e){
+				
+			}
+		}
 		return rawSequence;
 	}
 	
