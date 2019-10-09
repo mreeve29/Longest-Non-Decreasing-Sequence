@@ -10,15 +10,16 @@ public class SequenceGUI extends GBFrame{
 	
 	public void buttonClicked(JButton button) {
 		if(button == enterButton) {
-			SequenceSolver ss = new SequenceSolver(rawTextField.getText());
+			String raw = rawTextField.getText();
+			raw = raw.replaceAll(" ", "");
+			SequenceSolver ss = new SequenceSolver(raw);
 			int[] test = ss.getRawIntArray();
-			for(int i = 0; i < test.length; i++) {
-				System.out.println(test[i]);
-			}
+			System.out.println(ss.getAmountOfSequences());
+//			for(int i = 0; i < test.length; i++) {
+//				System.out.println(test[i]);
+//			}
 		}
 	}
-	
-	
 	
 	public static void main(String[] args) {
 		SequenceGUI frm = new SequenceGUI();
