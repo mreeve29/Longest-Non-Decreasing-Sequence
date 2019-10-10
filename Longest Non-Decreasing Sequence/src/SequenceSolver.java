@@ -9,6 +9,7 @@ public class SequenceSolver {
 	public SequenceSolver(String raw) {
 		rawInput = raw;
 		fullSequence = parseString();
+		//System.out.println(getAmountOfSequences());
 		sequences = new int[getAmountOfSequences()][];
 		fillSequences();
 		print();
@@ -34,7 +35,7 @@ public class SequenceSolver {
 	
 	public int getAmountOfSequences(){		
 		int seqs = 1;
-		int seqCount = 0;
+		int seqCount = 1;
 		
 		int last = fullSequence[0];
 		
@@ -66,9 +67,9 @@ public class SequenceSolver {
 			int current = fullSequence[i];
 			if(current >= last) {
 				seqCount++;
-				System.out.println("(" + i + ")" + " adding " + current + " to seq " + seqs + ", total length for this seq is " + seqCount);
+				//System.out.println("(" + i + ")" + " adding " + current + " to seq " + seqs + ", total length for this seq is " + seqCount);
 				if(i == fullSequence.length-1){
-					System.out.println("(" + i + ")" + " last --> " + current);
+					//System.out.println("(" + i + ")" + " last --> " + current);
 					int[] temp = new int[seqCount];
 					int x = 0;
 					for(int j = i - seqCount+1; j < i+1; j++) {
@@ -78,7 +79,7 @@ public class SequenceSolver {
 					sequences[seqs] = temp;
 				}
 			}else if(seqCount >= 1) {
-				System.out.println("(" + i + ")" + " seq " + seqs + " over");
+				//System.out.println("(" + i + ")" + " seq " + seqs + " over");
 				if(seqCount > high)high = seqCount;
 				int[] temp = new int[seqCount];
 				int x = 0;
