@@ -14,7 +14,7 @@ public class SequenceGUI extends GBFrame{
 			raw = raw.replaceAll(" ", "");
 			SequenceSolver ss = new SequenceSolver(raw);
 			int[] test = ss.getRawIntArray();
-			System.out.println(ss.getAmountOfSequences());
+			//System.out.println(ss.getAmountOfSequences());
 //			for(int i = 0; i < test.length; i++) {
 //				System.out.println(test[i]);
 //			}
