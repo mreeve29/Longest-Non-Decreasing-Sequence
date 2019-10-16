@@ -9,10 +9,9 @@ public class SequenceSolver {
 	public SequenceSolver(String raw) {
 		rawInput = raw;
 		fullSequence = parseString();
-
+		
 		sequences = new int[getAmountOfSequences()][];
 		fillSequences();
-		print();
 	}
 	
 	public int[] getRawIntArray() {
@@ -64,9 +63,9 @@ public class SequenceSolver {
 			int current = fullSequence[i];
 			if(current >= last) {
 				seqCount++;
-				System.out.println("(" + i + ")" + " adding " + current + " to seq " + seqs + ", total length for this seq is " + seqCount);
+				//System.out.println("(" + i + ")" + " adding " + current + " to seq " + seqs + ", total length for this seq is " + seqCount);
 				if(i == fullSequence.length-1){
-					System.out.println("(" + i + ")" + " last --> " + current);
+					//System.out.println("(" + i + ")" + " last --> " + current);
 					int[] temp = new int[seqCount];
 					int x = 0;
 					for(int j = i - seqCount+1; j < i+1; j++) {
@@ -76,7 +75,7 @@ public class SequenceSolver {
 					sequences[seqs] = temp;
 				}
 			}else if(seqCount >= 1) {
-				System.out.println("(" + i + ")" + " seq " + seqs + " over");
+				//System.out.println("(" + i + ")" + " seq " + seqs + " over");
 				int[] temp = new int[seqCount];
 				int x = 0;
 				for(int j = i - seqCount; j < i; j++) {
@@ -92,16 +91,18 @@ public class SequenceSolver {
 		}
 	}
 	//17,31,40,5,6,10,3,37,53,12,9,86
-	private void print() {
+	public String toString() {
+		String str = "";
 		int high = highest();
 		for(int i = 0; i < sequences.length; i++) {
 			if(sequences[i].length != high)continue;
 			if(high == 1)continue;
 			for(int j = 0; j < sequences[i].length; j++) {
-				System.out.print(sequences[i][j]+ " ");
+				str += sequences[i][j]+ " ";
 			}
-			System.out.println();
+			str += "\n";
 		}
+		return str;
 	}
 	
 	private int highest() {

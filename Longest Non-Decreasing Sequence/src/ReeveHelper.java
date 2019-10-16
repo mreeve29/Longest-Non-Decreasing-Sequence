@@ -107,15 +107,6 @@ public class ReeveHelper {
 		return valid;
 	}
 	
-	
-	public static boolean isBlank(String str) {
-		if(str == "" || str.isEmpty()) {
-			return true;
-		}else {
-			return false;
-		}
-	}
-	
 	public static boolean isBlank(JTextField field) {
 		String str = field.getText();
 		if(str == "" || str.isEmpty()) {
@@ -174,5 +165,42 @@ public class ReeveHelper {
 		}
 		return occ;
 	}
+	
+	public static boolean isBlank(String str) {
+		boolean blank = true;
+		for(int i = 0; i < str.length(); i++) {
+			char current = str.charAt(i);
+			if(!Character.isWhitespace(current)) {
+				blank = false;
+				break;
+			}
+		}
+		return blank;
+	}
+	
+	public static String removeWhiteSpaces(String input) {
+		String result = "";
+		
+		String[] split = input.split(",");
+		System.out.println(split.length);
+		for(int i = 0; i < split.length; i++) {
+			System.out.println(split[i]);
+			result += split[i].trim() + ",";
+		}
+		
+		return result.substring(0,result.length()-1);
+	}
+	
+	public static boolean isAllNumbers(String input) {
+		boolean letters = true;
+		for(int i = 0; i < input.length(); i++) {
+			if(!Character.isDigit(input.charAt(i))){
+				letters = false;
+				break;
+			}
+		}
+		return letters;
+	}
+	
 	
 }
