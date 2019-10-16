@@ -17,17 +17,16 @@ public class SequenceGUI extends GBFrame{
 		resultsTA.setEditable(false);
 		resultsTA.setFont(new Font(Font.SANS_SERIF,1,20));
 		exitButton.setOpaque(true);
-		exitButton.setForeground(Color.red);
+		exitButton.setBackground(Color.red);
 	}
 	
 	
 	public void buttonClicked(JButton button) {
 		if(button == enterButton) {
 			String raw = rawTextField.getText();
-			//raw = ReeveHelper.removeWhiteSpaces(raw);
-			//System.out.println(raw);
 			rawTextField.setText(raw);
 			if(!checkSequence(raw)) {
+				resultsTA.setFont(new Font(Font.SANS_SERIF,1,20));
 				SequenceSolver ss = new SequenceSolver(raw);
 				resultsTA.setText(ss.toString());
 			}
@@ -39,27 +38,28 @@ public class SequenceGUI extends GBFrame{
 		boolean errBool = false;
 		String error = "";
 		
+		boolean commas = false;
 		for(int i = 0; i < input.length(); i++) {
 			char current = input.charAt(i);
+			
 			if(i != input.length()-1) {
 				char next = input.charAt(i+1);
-				if(current == ',' && next == ',') {
-					System.out.println("Dobule ,");
+				
+				if(current == ',' && next == ',' && commas == false) {
+					commas = true;
 					errBool = true;
-					error += "Multiple ',' in a row";
+					error += "Multiple ',' in a row\n";
 					break;
 				}
 			}
 		}
 		
-		boolean nums = false;
-		boolean blank = false;
-		
 		String[] split = input.split(",");
 		
+		boolean nums = false;
+		boolean blank = false;
 		for(int i = 0; i < split.length; i++) {
 			String current = split[i];
-			//System.out.println(current);
 			
 			if(!ReeveHelper.isAllNumbers(current) && !nums) {
 				error += "Text contains characters other than numbers and or \nthere are spaces between numbers\n\n";
@@ -69,17 +69,17 @@ public class SequenceGUI extends GBFrame{
 			if(ReeveHelper.isBlank(current) && !blank){
 				error += "Text contains whitespaces between commas\n\n";
 				errBool = true;
-				blank = false;
+				blank = true;
 			}
-			
 		}
 		
-		
-		if(errBool)resultsTA.setText(error);
+		if(errBool) {
+			resultsTA.setText(error);
+			resultsTA.setFont(new Font(Font.SANS_SERIF,1,10));
+		}
 		
 		return errBool;
 	}
-	
 	
 	public static void main(String[] args) {
 		SequenceGUI frm = new SequenceGUI();

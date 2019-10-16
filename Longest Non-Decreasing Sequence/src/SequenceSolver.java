@@ -11,6 +11,7 @@ public class SequenceSolver {
 		fullSequence = parseString();
 		
 		sequences = new int[getAmountOfSequences()][];
+		System.out.println(getAmountOfSequences());
 		fillSequences();
 	}
 	

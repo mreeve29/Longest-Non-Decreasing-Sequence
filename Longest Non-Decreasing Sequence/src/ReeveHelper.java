@@ -194,7 +194,7 @@ public class ReeveHelper {
 	public static boolean isAllNumbers(String input) {
 		boolean letters = true;
 		for(int i = 0; i < input.length(); i++) {
-			if(!Character.isDigit(input.charAt(i))){
+			if(!Character.isDigit(input.charAt(i)) && input.charAt(i) != '-'){
 				letters = false;
 				break;
 			}
