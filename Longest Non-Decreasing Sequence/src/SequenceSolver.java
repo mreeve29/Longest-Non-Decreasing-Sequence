@@ -99,7 +99,7 @@ public class SequenceSolver {
 			last = current;
 		}
 	}
-	//17,31,40,5,6,10,3,37,53,12,9,86
+
 	public String toString() {
 		String str = "";
 		int high = highest();
