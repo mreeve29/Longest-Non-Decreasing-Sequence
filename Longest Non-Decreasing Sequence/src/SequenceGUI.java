@@ -60,8 +60,8 @@ public class SequenceGUI extends GBFrame{
 		boolean error = false;
 		String errorMessage = "";
 		
-		//check for no input / a char that isn't a number
-		if(input.length() == 0 || !Character.isDigit(input.charAt(0))) {
+		//check for no input / a char that isn't a number - dont trigger if first character is negative symbol
+		if((input.length() == 0 || !Character.isDigit(input.charAt(0)) && input.charAt(0) != '-')) {
 			error = true;
 			errorMessage+="Invalid input";
 			resultsTA.setText(errorMessage);

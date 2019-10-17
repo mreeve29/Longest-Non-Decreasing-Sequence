@@ -60,7 +60,7 @@ public class SequenceSolver {
 		//keeps track of amount of sequences
 		int seqs = 0;
 		
-		//keeps track of amount of numbers in each sequence.
+		//keeps track of amount of numbers in each sequence
 		int seqCount = 0;
 		
 		int last = fullSequence[0];
