@@ -107,11 +107,14 @@ public class SequenceSolver {
 			if(sequences[i].length != high)continue;
 			if(high == 1)return "oneSequence";
 			for(int j = 0; j < sequences[i].length; j++) {
-				str += sequences[i][j]+ " ";
+				str += sequences[i][j]+ ",";
 			}
-			str += "\n";
+			//remove last comma
+			str = str.substring(0,str.length()-1);
+			str += " and ";
 		}
-		return str;
+		//remove last ' and '
+		return str.substring(0,str.length()-5);
 	}
 	
 	//returns the highest length in 2d array, used for final comparison between sequences

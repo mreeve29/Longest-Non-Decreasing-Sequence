@@ -9,14 +9,15 @@ public class SequenceGUI extends GBFrame{
 
 	//instance objects
 	private JLabel instructionLabel = addLabel("<html>Input numbers seperated by a comma<br/>"
-			+ "If there are multiple sequences with the same length <br/>"
-			+ "they will all be displayed on seperate lines</html>",1,1,2,1);
+			+ "If there are multiple sequences with the same length they will all be displayed</html>",1,1,3,1);
 	
-	private JTextField rawTextField = addTextField("",2,1,2,1);
-	private JButton exitButton = addButton("Exit",3,2,1,1);
+	private JTextField rawTextField = addTextField("",2,1,3,1);
+	private JButton exitButton = addButton("Exit",3,3,1,1);
 	private JButton enterButton = addButton("Enter",3,1,1,1);
 	
-	private JTextArea resultsTA = addTextArea("",4,1,2,2);
+	private JTextArea resultsTA = addTextArea("",4,1,3,2);
+	
+	private JButton resetButton = addButton("Reset",3,2,1,1);
 	
 	//constructor
 	public SequenceGUI() {
@@ -24,7 +25,7 @@ public class SequenceGUI extends GBFrame{
 		resultsTA.setFont(new Font(Font.SANS_SERIF,1,20));
 		exitButton.setOpaque(true);
 		exitButton.setBackground(Color.red);
-		this.setMinimumSize(new Dimension(400,400));
+		this.setMinimumSize(new Dimension(500,400));
 	}
 	
 	//button event listener
@@ -47,6 +48,11 @@ public class SequenceGUI extends GBFrame{
 				}
 			}
 		}else if(button == exitButton) System.exit(1);
+		else if(button == resetButton) {
+			rawTextField.setText("");
+			resultsTA.setFont(new Font(Font.SANS_SERIF,1,20));
+			resultsTA.setText("");
+		}
 	}
 	
 	//error checking
@@ -80,8 +86,15 @@ public class SequenceGUI extends GBFrame{
 			}
 		}
 		
-		//check for invalid inputs, like letters or symbols
+		//split input
 		String[] split = input.split(",");
+		
+		if(split.length > 25) {
+			error = true;
+			errorMessage += "Too many numbers, please input less than 25 numbers";
+		}
+		
+		//check for invalid inputs, like letters or symbols
 		for(int i = 0; i < split.length; i++) {
 			String current = split[i];
 			try {
