@@ -1,24 +1,22 @@
-
 public class SequenceSolver {
 	
+	//instance objects
 	private String rawInput;
+	
+	//instance variables
 	private int[] fullSequence;
 	private int[][] sequences;
 	
-	
+	//constructor
 	public SequenceSolver(String raw) {
 		rawInput = raw;
 		fullSequence = parseString();
 		
 		sequences = new int[getAmountOfSequences()][];
-		System.out.println(getAmountOfSequences());
 		fillSequences();
 	}
 	
-	public int[] getRawIntArray() {
-		return fullSequence;
-	}
-	
+	//converts given sequence into int array
 	private int[] parseString() {
 		String[] split = rawInput.split(",");
 		int[] rawSequence = new int[split.length];
@@ -26,27 +24,31 @@ public class SequenceSolver {
 		for(int i = 0; i < split.length; i++){
 			try {
 				rawSequence[i] = Integer.parseInt(split[i]);
-			}catch (Exception e){
-				
-			}
+			}catch (Exception e){}
 		}
 		return rawSequence;
 	}
 	
-	public int getAmountOfSequences(){		
+	//returns amount of sequences in input, used for initializing full array with correct length
+	private int getAmountOfSequences(){		
+		//keeps track of amount of sequences
 		int seqs = 1;
+		
+		//keeps track of amount of numbers in each sequence.
 		int seqCount = 1;
 		
 		int last = fullSequence[0];
-		
 		for(int i = 1; i < fullSequence.length; i++) {
 			int current = fullSequence[i];
 			if(current >= last) {
+				//continuation of sequence
 				seqCount++;
+				
 			}else if(seqCount >= 1) {
 				//done with sequence (granted sequence >= 1 in length)
 				seqs++;
 				seqCount = 0;
+				//decrement i so that the number that was used to see if the sequence was over can be used again in a new sequence
 				i--;
 			}
 			last = current;
@@ -55,18 +57,22 @@ public class SequenceSolver {
 	}
 	
 	private void fillSequences() {
+		//keeps track of amount of sequences
 		int seqs = 0;
+		
+		//keeps track of amount of numbers in each sequence.
 		int seqCount = 0;
 		
 		int last = fullSequence[0];
-		
 		for(int i = 0; i < fullSequence.length; i++) {
 			int current = fullSequence[i];
 			if(current >= last) {
+				//continuation of sequence
 				seqCount++;
-				//System.out.println("(" + i + ")" + " adding " + current + " to seq " + seqs + ", total length for this seq is " + seqCount);
+				
+				//if the last number in the full sequence continues the sequence
 				if(i == fullSequence.length-1){
-					//System.out.println("(" + i + ")" + " last --> " + current);
+					//add sequence to 2d array
 					int[] temp = new int[seqCount];
 					int x = 0;
 					for(int j = i - seqCount+1; j < i+1; j++) {
@@ -76,7 +82,9 @@ public class SequenceSolver {
 					sequences[seqs] = temp;
 				}
 			}else if(seqCount >= 1) {
-				//System.out.println("(" + i + ")" + " seq " + seqs + " over");
+				//done with sequence (granted sequence >= 1 in length)
+				
+				//add sequence to 2d array
 				int[] temp = new int[seqCount];
 				int x = 0;
 				for(int j = i - seqCount; j < i; j++) {
@@ -97,7 +105,7 @@ public class SequenceSolver {
 		int high = highest();
 		for(int i = 0; i < sequences.length; i++) {
 			if(sequences[i].length != high)continue;
-			if(high == 1)continue;
+			if(high == 1)return "oneSequence";
 			for(int j = 0; j < sequences[i].length; j++) {
 				str += sequences[i][j]+ " ";
 			}
@@ -106,6 +114,7 @@ public class SequenceSolver {
 		return str;
 	}
 	
+	//returns the highest length in 2d array, used for final comparison between sequences
 	private int highest() {
 		int high = 0;
 		for(int i = 0; i < sequences.length; i++) {
